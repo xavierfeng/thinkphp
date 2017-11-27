@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:76:"D:\www\thinkphp\public/../application/admin/view/default/property\index.html";i:1511677554;s:73:"D:\www\thinkphp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:76:"D:\www\thinkphp\public/../application/admin/view/default/property\index.html";i:1511748562;s:73:"D:\www\thinkphp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -104,6 +104,12 @@
 		<h2>报修管理</h2>
 	</div>
 
+
+<style>
+	.pagination{list-style: none;}
+	.pagination li{display: inline-block;padding: 2px 8px}
+</style>
+
 	<div class="cf">
 		<a class="btn" href="<?php echo url('add'); ?>">新 增</a>
 		<a class="btn" id="del" href="javascript:;">删 除</a>
@@ -142,11 +148,15 @@
 							<a class="confirm ajax-get" title="删除" href="<?php echo url('del?id='.$property['id']); ?>">删除</a>
 						</td>
 					</tr>
-				<?php endforeach; endif; else: echo "" ;endif; else: ?>
-				<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
-				<?php endif; ?>
+				<?php endforeach; endif; else: echo "" ;endif; endif; ?>
 			</tbody>
 		</table>
+
+
+		<div>
+			<?php echo $page; ?>
+		</div>
+
 	</div>
 
         </div>

@@ -1,0 +1,62 @@
+{extend name="public/base" /}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>小区通知</h2>
+	</div>
+
+
+<style>
+	.pagination{list-style: none;}
+	.pagination li{display: inline-block;padding: 2px 8px}
+</style>
+
+	<div class="cf">
+		<a class="btn" href="{:url('noticeAdd')}">新 增</a>
+	</div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th class="row-selected">
+						<input class="checkbox check-all" type="checkbox">
+					</th>
+					<th>通知人</th>
+					<th>标题</th>
+					<th>内容</th>
+                    <th>发布时间</th>
+					<th>浏览次数</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{volist name="list" id="notice"}
+					<tr>
+						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="{$notice['id']}"> </td>
+						<td>{$notice.member}</td>
+						<td>{$notice.title}</td>
+						<td>{$notice.content}</td>
+                        <td>{$notice.create_time | time_format}</td>
+                        <td>{$notice.view_times}</td>
+						<td>
+							<a title="编辑" href="{:url('noticeUpdate?id='.$notice['id'])}">编辑</a>
+							<a class="confirm ajax-get" title="删除" href="{:url('noticeDel?id='.$notice['id'])}">删除</a>
+						</td>
+					</tr>
+				{/volist}
+
+			</tbody>
+		</table>
+
+
+		<div>
+			{$page}
+		</div>
+
+	</div>
+{/block}
+
+{block name="script"}
+{/block}

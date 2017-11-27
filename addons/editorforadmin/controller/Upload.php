@@ -33,6 +33,8 @@ class Upload extends Addons{
                 $savepath= basename($url);
                 $savename = $info->getFilename();
                 $fullpath= __ROOT__.$url.'/'.$savename;
+                //修复ueditor文件上传路径显示错误
+                $fullpath=str_replace('/\\','/',$fullpath);
                 $return[$key]['imgFile']['name']=$info->getInfo('name');//原文件名
                 $return[$key]['imgFile']['savepath']=$savepath;
                 $return[$key]['imgFile']['savename']=$savename;

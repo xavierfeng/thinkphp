@@ -9,8 +9,10 @@ class Property extends Admin{
     //报修列表页
     public function index()
     {
-        $list=Db::name('property')->select();
+        $list=Db::name('property')->paginate(5);
+        $page=$list->render();
         $this->assign('list',$list);
+        $this->assign('page',$page);
         $this->assign('meta_title' , '保修管理');
         return $this->fetch();
     }

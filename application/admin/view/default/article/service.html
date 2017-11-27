@@ -1,0 +1,62 @@
+{extend name="public/base" /}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>便民服务</h2>
+	</div>
+
+
+<style>
+	.pagination{list-style: none;}
+	.pagination li{display: inline-block;padding: 2px 8px}
+</style>
+
+	<div class="cf">
+		<a class="btn" href="{:url('serviceAdd')}">新 增</a>
+	</div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th class="row-selected">
+						<input class="checkbox check-all" type="checkbox">
+					</th>
+					<th>发布人</th>
+					<th>标题</th>
+					<th>内容</th>
+                    <th>发布时间</th>
+					<th>浏览次数</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{volist name="list" id="service"}
+					<tr>
+						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="{$service['id']}"> </td>
+						<td>{$service.member}</td>
+						<td>{$service.title}</td>
+						<td>{$service.content}</td>
+                        <td>{$service.create_time | time_format}</td>
+                        <td>{$service.view_times}</td>
+						<td>
+							<a title="编辑" href="{:url('serviceUpdate?id='.$service['id'])}">编辑</a>
+							<a class="confirm ajax-get" title="删除" href="{:url('serviceDel?id='.$service['id'])}">删除</a>
+						</td>
+					</tr>
+				{/volist}
+
+			</tbody>
+		</table>
+
+
+		<div>
+			{$page}
+		</div>
+
+	</div>
+{/block}
+
+{block name="script"}
+{/block}

@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use app\admin\model\AuthGroup;
+use think\Db;
 
 /**
  * 后台内容控制器
@@ -924,6 +925,153 @@ class Article extends Admin {
             }
         }else{
             $this->error('非法请求！');
+        }
+    }
+
+    //小区通知
+    public function notice()
+    {
+        $list=Db::name('notice')->paginate(3);
+        $page=$list->render();
+        $this->assign('list',$list);
+        $this->assign('page',$page);
+        $this->assign('meta_title' , '小区通知管理');
+        return $this->fetch();
+    }
+
+    //小区通知添加
+    public function noticeAdd(){
+        if(request()->isPost()){
+            $notice = model('notice');
+            $post_data=\think\Request::instance()->post();
+            //自动验证
+            $validate = validate('notice');
+            if(!$validate->check($post_data)){
+                return $this->error($validate->getError());
+            }
+            $data = $notice->create($post_data);
+            if($data){
+                $this->success('新增成功', url('notice'));
+            } else {
+                $this->error($notice->getError());
+            }
+        } else {
+            $this->assign('info',null);
+            $this->assign('meta_title', '新增导航');
+            return $this->fetch('noticeEdit');
+        }
+    }
+
+    //修改通知
+    public function noticeUpdate($id = 0){
+        if($this->request->isPost()){
+            $postdata = \think\Request::instance()->post();
+            $notice = \think\Db::name("notice");
+            $data = $notice->update($postdata);
+            if($data !== false){
+                $this->success('编辑成功', url('notice'));
+            } else {
+                $this->error('编辑失败');
+            }
+        } else {
+            $info =[];
+            /* 获取数据 */
+            $info = \think\Db::name('notice')->find($id);
+
+            if(false === $info){
+                $this->error('获取配置信息错误');
+            }
+            $this->assign('info', $info);
+            $this->meta_title = '编辑通知';
+            return $this->fetch('noticeedit');
+        }
+    }
+
+    //删除通知
+    public function noticeDel(){
+        $id = array_unique((array)input('id',0));
+        if ( empty($id) ) {
+            $this->error('请选择要操作的数据!');
+        }
+        $map = array('id' => array('in', $id) );
+        if(\think\Db::name('notice')->where($map)->delete()){
+            $this->success('删除成功');
+        } else {
+            $this->error('删除失败！');
+        }
+    }
+
+
+    //便民服务
+    public function service()
+    {
+        $list=Db::name('service')->paginate(3);
+        $page=$list->render();
+        $this->assign('list',$list);
+        $this->assign('page',$page);
+        $this->assign('meta_title' , '便民服务管理');
+        return $this->fetch();
+    }
+
+    //便民服务添加
+    public function serviceAdd(){
+        if(request()->isPost()){
+            $service = model('service');
+            $post_data=\think\Request::instance()->post();
+            //自动验证
+            $validate = validate('service');
+            if(!$validate->check($post_data)){
+                return $this->error($validate->getError());
+            }
+            $data = $service->create($post_data);
+            if($data){
+                $this->success('新增成功', url('service'));
+            } else {
+                $this->error($service->getError());
+            }
+        } else {
+            $this->assign('info',null);
+            $this->assign('meta_title', '新增导航');
+            return $this->fetch('serviceEdit');
+        }
+    }
+
+    //修改便民服务
+    public function serviceUpdate($id = 0){
+        if($this->request->isPost()){
+            $postdata = \think\Request::instance()->post();
+            $service = \think\Db::name("service");
+            $data = $service->update($postdata);
+            if($data !== false){
+                $this->success('编辑成功', url('service'));
+            } else {
+                $this->error('编辑失败');
+            }
+        } else {
+            $info =[];
+            /* 获取数据 */
+            $info = \think\Db::name('service')->find($id);
+
+            if(false === $info){
+                $this->error('获取配置信息错误');
+            }
+            $this->assign('info', $info);
+            $this->meta_title = '编辑通知';
+            return $this->fetch('serviceEdit');
+        }
+    }
+
+    //删除便民服务
+    public function serviceDel(){
+        $id = array_unique((array)input('id',0));
+        if ( empty($id) ) {
+            $this->error('请选择要操作的数据!');
+        }
+        $map = array('id' => array('in', $id) );
+        if(\think\Db::name('service')->where($map)->delete()){
+            $this->success('删除成功');
+        } else {
+            $this->error('删除失败！');
         }
     }
 }
