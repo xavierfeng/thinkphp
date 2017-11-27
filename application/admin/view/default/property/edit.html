@@ -1,0 +1,47 @@
+{extend name="public/base" /}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>
+			{$info['id']?'编辑':'新增'}导航
+		</h2>
+	</div>
+	<form action="{:url()}" method="post" class="form-horizontal">
+		<div class="form-item">
+			<label class="item-label">报修人<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="user" value="{$info.user|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">电话<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="tel" value="{$info.tel|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">地址<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="address" value="{$info.address|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">问题<span class="check-tips"></span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="question" value="{$info.question|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<input type="hidden" name="odd" value='{$info.odd|default='property'.uniqid()}'>
+			<button class="btn submit-btn ajax-posts" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+{/block}
+{block name="script"}
+<script type="text/javascript" charset="utf-8">
+	//导航高亮
+	highlight_subnav('{:url('index')}');
+</script>
+{/block}
