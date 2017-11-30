@@ -76,6 +76,8 @@ class Category extends Admin{
         		return $this->error($validate->getError());
         	}
             if(false !== $Category->allowField(true)->save($data)){
+        	    //更新分类缓存 修复新添加的分类不能添加文章的BUG
+        	    cache('sys_category_list',null);
                 $this->success('新增成功！', url('index'));
             } else {
                 $error = $Category->getError();

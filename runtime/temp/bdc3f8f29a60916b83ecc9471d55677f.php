@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"D:\www\thinkphp\public/../application/home/view/default/index\service.html";i:1511779333;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"D:\www\thinkphp\public/../application/home/view/default/index\service.html";i:1511955347;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -29,16 +29,16 @@
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>
+                <p class="navbar-text"><a href="/home/index/index.html" class="navbar-link">首页</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="fuwu.html" class="navbar-link">服务</a></p>
+                <p class="navbar-text"><a href="/home/index/fuwu.html" class="navbar-link">服务</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
+                <p class="navbar-text"><a href="/home/index/faxian.html" class="navbar-link">发现</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="#" class="navbar-link">我的</a></p>
+                <p class="navbar-text"><a  id="my" href="javascript:;" class="navbar-link">我的</a></p>
             </div>
         </div>
     </nav>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-xs-10">
                     <p class="title"><?php echo $service['title']; ?></p>
-                    <p class="intro"><?php echo $service['content']; ?></p>
+                    <p class="intro"><?php echo $service['title']; ?><?php echo $service['title']; ?></p>
                     <p class="info">浏览次数:<?php echo $service['view_times']; ?><span class="pull-right"><?php echo time_format($service['create_time'] ); ?></span> </p>
                 </div>
             </a>
@@ -83,13 +83,28 @@
                         var that = this;
                         var cover_id=this.cover_id;
                         $.getJSON("/home/index/getPicture.html",{cover_id:cover_id},function(src){
-                            $(".ajax").append("<div class='row noticeList'><a href='/home/index/serviceDetail?id="+that.id+"'><div class='col-xs-2'><img class='noticeImg' src='"+src.path+"' /></div><div class='col-xs-10'><p class='title'>"+that.title+"</p><p class='intro'>"+that.content+"</p><p class='info'>浏览次数:"+that.view_times+"<span class='pull-right'>"+getLocalTime(that.create_time)+"</span></p></div></a></div>");
+                            $(".ajax").append("<div class='row noticeList'><a href='/home/index/serviceDetail?id="+that.id+"'><div class='col-xs-2'><img class='noticeImg' src='"+src.path+"' /></div><div class='col-xs-10'><p class='title'>"+that.title+"</p><p class='intro'>"+that.title+that.title+"</p><p class='info'>浏览次数:"+that.view_times+"<span class='pull-right'>"+getLocalTime(that.create_time)+"</span></p></div></a></div>");
                         });
 
                     });
                 })
             })
         });
+</script>
+<script>
+    $(function(){
+        $("#my").click(function(){
+            var login ="<?=is_login()?>";
+            if(login){
+
+                window.location="/user/user/my.html";
+            }else{
+                alert("请先登录");
+                window.location="/user/login/index.html";
+            }
+        });
+
+    })
 </script>
 </body>
 </html>

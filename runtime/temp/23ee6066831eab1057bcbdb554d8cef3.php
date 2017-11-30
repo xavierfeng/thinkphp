@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"D:\www\thinkphp\public/../application/home/view/default/index\bactivitydetail.html";i:1511955991;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -5,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>便民服务详情</title>
+    <title>商家活动详情</title>
 
     <!-- Bootstrap -->
     <link href="/static/statics/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,16 +46,16 @@
 
     <div class="container-fluid">
         <div class="blank"></div>
-        <h3 class="noticeDetailTitle"><strong>{$info.title}</strong></h3>
-        <div class="noticeDetailInfo">发布者:{$info.member}</div>
-        <div class="noticeDetailInfo">发布时间：{$info.create_time|time_format}</div>
+        <h3 class="noticeDetailTitle"><strong><?php echo $info['title']; ?></strong></h3>
+        <div class="noticeDetailInfo">关键字:<?php echo $info['keywords']; ?></div>
+        <div class="noticeDetailInfo">发布时间：<?php echo time_format($info['create_time']); ?></div>
         <div class="noticeDetailContent">
-            {$info.content}
+            <?php echo $infoContent['content']; ?>
         </div>
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/static/statics/jquery-1.11.2.min.js"></script>
+<script src="/static/static/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/static/statics/bootstrap/js/bootstrap.min.js"></script>
 <script>

@@ -48,6 +48,7 @@ class Modelmodel extends Model{
                 return false;
             }
         } else { //更新数据
+            var_dump($data);die;
             $status = $this->update($data); //更新基础内容
             if(false === $status){
                 return false;

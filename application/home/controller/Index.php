@@ -11,9 +11,12 @@ namespace app\home\controller;
 use app\admin\model\Notice;
 use app\admin\model\Property;
 use app\home\model\Document;
+use app\home\model\Join;
 use OT\DataDictionary;
 use think\Config;
 use think\Db;
+use think\response\Json;
+use think\Session;
 
 /**
  * 前台首页控制器
@@ -74,7 +77,7 @@ class Index extends Home{
         if($_GET){
             $page=$_GET['page'];
         }
-        $pageSize=3;
+        $pageSize=2;
         $start=($page-1)*$pageSize;
         $list =Db::name('notice')->limit($start,$pageSize)->select();
         $this->assign('list',$list);
@@ -85,7 +88,7 @@ class Index extends Home{
     public function noticeAjax()
     {
         $page=$_GET['page'];
-        $pageSize=3;
+        $pageSize=2;
         $start=($page-1)*$pageSize;
         $list =Db::name('notice')->limit($start,$pageSize)->select();
         echo json_encode($list);
@@ -98,7 +101,7 @@ class Index extends Home{
         $info =[];
         /* 获取数据 */
         $info = \think\Db::name('notice')->find($id);
-
+        \think\Db::name('notice')->where('id',$id)->setInc('view_times');
         if(false === $info){
             $this->error('获取配置信息错误');
         }
@@ -113,7 +116,7 @@ class Index extends Home{
         if($_GET){
             $page=$_GET['page'];
         }
-        $pageSize=3;
+        $pageSize=2;
         $start=($page-1)*$pageSize;
         $list =Db::name('service')->limit($start,$pageSize)->select();
         $this->assign('list',$list);
@@ -123,7 +126,7 @@ class Index extends Home{
     public function serviceAjax()
     {
         $page=$_GET['page'];
-        $pageSize=3;
+        $pageSize=2;
         $start=($page-1)*$pageSize;
         $list =Db::name('service')->limit($start,$pageSize)->select();
         echo json_encode($list);
@@ -143,11 +146,105 @@ class Index extends Home{
         $info =[];
         /* 获取数据 */
         $info = \think\Db::name('service')->find($id);
-
+        \think\Db::name('service')->where('id',$id)->setInc('view_times');
         if(false === $info){
             $this->error('获取配置信息错误');
         }
         $this->assign('info', $info);
         return $this->fetch();
     }
+
+    //商家活动
+    public function Bactivity()
+    {
+        $page=1;
+        if($_GET){
+            $page=$_GET['page'];
+        }
+        $pageSize=1;
+        $start=($page-1)*$pageSize;
+        $list =Db::name('document')->whereLike('name','Bactivity%')->where('deadline','>',time())->where('status',1)->limit($start,$pageSize)->select();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    //商家活动Ajax
+    public function BactivityAjax()
+    {
+        $page=$_GET['page'];
+        $pageSize=1;
+        $start=($page-1)*$pageSize;
+        $list =Db::name('document')->whereLike('name','Bactivity%')->where('deadline','>',time())->where('status',1)->limit($start,$pageSize)->select();
+        echo json_encode($list);
+
+    }
+    //商家活动详情
+    public function BactivityDetail($id)
+    {
+        $info =[];
+        /* 获取数据 */
+        $info = \think\Db::name('document')->find($id);
+        $infoContent = \think\Db::name('document_article')->find($id);
+        \think\Db::name('document')->where('id',$id)->setInc('view');
+        if(false === $info){
+            $this->error('获取配置信息错误');
+        }
+        $this->assign('info', $info);
+        $this->assign('infoContent', $infoContent);
+        return $this->fetch();
+    }
+
+    //小区活动
+    public function Vactivity()
+    {
+        $page=1;
+        if($_GET){
+            $page=$_GET['page'];
+        }
+        $pageSize=1;
+        $start=($page-1)*$pageSize;
+        $list =Db::name('document')->whereLike('name','Vactivity%')->where('deadline','>',time())->where('status',1)->limit($start,$pageSize)->select();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    //小区活动Ajax
+    public function VactivityAjax()
+    {
+        $page=$_GET['page'];
+        $pageSize=1;
+        $start=($page-1)*$pageSize;
+        $list =Db::name('document')->whereLike('name','Vactivity%')->where('deadline','>',time())->where('status',1)->limit($start,$pageSize)->select();
+        echo json_encode($list);
+
+    }
+    //小区活动详情
+    public function VactivityDetail($id)
+    {
+        $info =[];
+        /* 获取数据 */
+        $info = \think\Db::name('document')->find($id);
+        $infoContent = \think\Db::name('document_article')->find($id);
+        \think\Db::name('document')->where('id',$id)->setInc('view');
+        if(false === $info){
+            $this->error('获取配置信息错误');
+        }
+        $this->assign('info', $info);
+        $this->assign('infoContent', $infoContent);
+        return $this->fetch();
+    }
+
+    //报名参加小区活动
+    public function join()
+    {
+        $check = Db::name('join')->where('user_id',$_POST['user_id'])->where('activity_id',$_POST['activity_id'])->find();
+        if(!$check){
+            $join = new Join();
+            $join->data([
+                'user_id'=>$_POST['user_id'],
+                'activity_id'=>$_POST['activity_id']
+            ]);
+            $join->save();
+            echo "success";
+        }
+    }
+
 }

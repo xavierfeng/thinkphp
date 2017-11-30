@@ -28,16 +28,16 @@
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid text-center">
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>
+                <p class="navbar-text"><a href="/home/index/index.html" class="navbar-link">首页</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="fuwu.html" class="navbar-link">服务</a></p>
+                <p class="navbar-text"><a href="/home/index/fuwu.html" class="navbar-link">服务</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
+                <p class="navbar-text"><a href="/home/index/faxian.html" class="navbar-link">发现</a></p>
             </div>
             <div class="col-xs-3">
-                <p class="navbar-text"><a href="#" class="navbar-link">我的</a></p>
+                <p class="navbar-text"><a  id="my" href="javascript:;" class="navbar-link">我的</a></p>
             </div>
         </div>
     </nav>
@@ -67,7 +67,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="/home/index/online.html">
+                        <a href="javascript:;" id="online">
                             <div class="indexLabel label-info">
                                 <span class="glyphicon glyphicon-heart-empty"></span><br/>
                                 在线报修
@@ -75,7 +75,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="/home/index/Bactivity.html">
                             <div class="indexLabel label-success">
                                 <span class="glyphicon glyphicon-briefcase"></span><br/>
                                 商家活动
@@ -91,7 +91,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="notice.html">
+                        <a href="/home/index/Vactivity.html">
                             <div class="indexLabel label-default">
                                 <span class="glyphicon glyphicon-apple"></span><br/>
                                 小区活动
@@ -104,8 +104,32 @@
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/static/statics/jquery-1.11.2.min.js"></script>
+<script src="/static/static/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/static/statics/bootstrap/js/bootstrap.min.js"></script>
+<script>
+ $(function(){
+     $("#my").click(function(){
+         var login ="<?=is_login()?>";
+         if(login){
+
+             window.location="/user/user/my.html";
+         }else{
+             alert("请先登录");
+             window.location="/user/login/index.html";
+         }
+     });
+
+     $("#online").click(function(){
+         var login ="<?=is_login()?>";
+         if(login!=0){
+             window.location="/home/index/online.html";
+         }else{
+             alert("请先登录");
+             window.location="/user/login/index.html";
+         }
+     })
+ })
+</script>
 </body>
 </html>

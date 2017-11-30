@@ -49,4 +49,8 @@ class User extends Base {
         }
     }
 
+    public function my()
+    {
+        return $this->fetch();
+    }
 }

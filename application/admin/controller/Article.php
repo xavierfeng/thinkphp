@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use app\admin\model\AuthGroup;
+use app\admin\model\Modelmodel;
 use think\Db;
 
 /**
@@ -1073,5 +1074,18 @@ class Article extends Admin {
         } else {
             $this->error('删除失败！');
         }
+    }
+
+    //执行脚本 修改活动状态
+    public function checkActivity()
+    {
+        //设置php脚本最长执行时间为无限制
+        set_time_limit(0);
+        $Model = new Modelmodel();
+        $time = time();
+        $sql="UPDATE `document` set status=-1 WHERE `deadline` < {$time} and status = 1";
+        $Model->query($sql);
+        sleep(1);
+        echo "清理过期活动完成".date("Y-m-d H:i:s",$time);
     }
 }

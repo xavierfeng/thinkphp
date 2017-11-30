@@ -11,6 +11,7 @@ namespace app\user\controller;
 use app\common\controller\UcApi;
 use think\Controller;
 use think\Cookie;
+use think\Session;
 
 /**
  * 用户登入
@@ -34,7 +35,6 @@ class Login extends Controller {
             /* 调用UC登录接口登录 */
             $user = new UcApi;
             $uid = $user->login($username, $password, $type);
-
             if(0 < $uid){ //UC登录成功
                 /* 登录用户 */
                 $Member = model('Member');

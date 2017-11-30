@@ -1,104 +1,67 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:72:"D:\www\thinkphp\public/../application/user/view/default/login\index.html";i:1511683839;s:72:"D:\www\thinkphp\public/../application/user/view/default/base\common.html";i:1511678516;s:69:"D:\www\thinkphp\public/../application/user/view/default/base\var.html";i:1496373782;}*/ ?>
-<!DOCTYPE HTML>
-<html>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\thinkphp\public/../application/user/view/default/login\index.html";i:1511955234;}*/ ?>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title><?php echo config('WEB_SITE_TITLE'); ?></title>
-<link href="__STATIC__/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="__STATIC__/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-<link href="__STATIC__/bootstrap/css/docs.css" rel="stylesheet">
-<link href="__STATIC__/bootstrap/css/twothink.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>登录</title>
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="__STATIC__/bootstrap/js/html5shiv.js"></script>
-<![endif]-->
+  <!-- Bootstrap -->
+  <link href="/static/statics/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/statics/css/style.css" rel="stylesheet">
 
-<!--[if lt IE 9]>
-<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
-<![endif]-->
-<!--[if gte IE 9]><!-->
-<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="__STATIC__/bootstrap/js/bootstrap.min.js"></script>
-<!--<![endif]-->
-<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
-<?php echo hook('pageHeader'); ?>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    .main{margin-bottom: 60px;}
+    .indexLabel{padding: 10px 0; margin: 10px 0 0; color: #fff;}
+  </style>
 </head>
 <body>
-	<!-- 头部 -->
-	<!-- 导航条
-	================================================== -->
-	<!--<div class="navbar navbar-inverse navbar-fixed-top">
-	    <div class="navbar-inner">
-	        <div class="container">
-	            <a class="brand" href="<?php echo url('index/index'); ?>">TwoThink</a>
-	            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	                <span class="icon-bar"></span>
-	            </button>
-	            <div class="nav-collapse collapse">
-	                <ul class="nav"> 
-		                <?php $__NAV__ = \think\Db::name('Channel')->field(true)->where("status=1")->order("sort")->select();if(is_array($__NAV__) || $__NAV__ instanceof \think\Collection || $__NAV__ instanceof \think\Paginator): $i = 0; $__LIST__ = $__NAV__;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$nav): $mod = ($i % 2 );++$i;if($nav['pid'] == '0'): ?>
-		                        <li>
-		                            <a href="<?php echo get_nav_url($nav['url']); ?>" target="<?php if($nav['target'] == '1'): ?>_blank<?php else: ?>_self<?php endif; ?>"><?php echo $nav['title']; ?></a>
-		                        </li>
-                        	<?php endif; endforeach; endif; else: echo "" ;endif; ?> 
-	                </ul>
-	            </div>
-	            <div class="nav-collapse collapse pull-right">
-	                <?php if(is_login()): ?>
-	                    <ul class="nav" style="margin-right:0">
-	                        <li class="dropdown">
-	                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0"><?php echo get_username(); ?> <b class="caret"></b></a>
-	                            <ul class="dropdown-menu">
-	                                <li><a href="<?php echo url('User/profile'); ?>">修改密码</a></li>
-	                                <li><a href="<?php echo url('Login/logout'); ?>">退出</a></li>
-	                            </ul>
-	                        </li>
-	                    </ul>
-	                <?php else: ?>
-	                    <ul class="nav" style="margin-right:0">
-	                        <li>
-	                            <a href="<?php echo url('User/login'); ?>">登录</a>
-	                        </li>
-	                        <li>
-	                            <a href="<?php echo url('User/register'); ?>" style="padding-left:0;padding-right:0">注册</a>
-	                        </li>
-	                    </ul>
-	                <?php endif; ?>
-	            </div>
-	        </div>
-	    </div>
-	</div>-->
+<div class="main">
+  <!--导航部分-->
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid text-center">
+      <div class="col-xs-3">
+        <p class="navbar-text"><a href="/home/index/index.html" class="navbar-link">首页</a></p>
+      </div>
+      <div class="col-xs-3">
+        <p class="navbar-text"><a href="/home/index/fuwu.html" class="navbar-link">服务</a></p>
+      </div>
+      <div class="col-xs-3">
+        <p class="navbar-text"><a href="/home/index/faxian.html" class="navbar-link">发现</a></p>
+      </div>
+      <div class="col-xs-3">
+        <p class="navbar-text"><a  id="my" href="javascript:;" class="navbar-link">我的</a></p>
+      </div>
+    </div>
+  </nav>
+  <!--导航结束-->
 
-	<!-- /头部 -->
-	
-	<!-- 主体 -->
-	
-
-
-	<div id="main-container" class="container">
-	    <div class="row">
-	         
-	        
-<section>
-  <div class="span12" style="margin-left: 200px;">
+  <div class="container-fluid">
     <form class="login-form" action="" method="post">
       <div class="control-group">
         <label class="control-label" for="inputEmail"><h1>登录</h1></label>
         <div class="controls">
-          <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" style="width: 100%;height: 30px;">
+          <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username" style="width: 100%;height: 30px;border-radius:5px;">
         </div>
+        <br/>
       </div>
       <div class="control-group">
         <div class="controls">
-          <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" style="width: 100%;height: 30px;">
+          <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password" style="width: 100%;height: 30px;border-radius:5px;">
         </div>
+        <br/>
       </div>
       <div class="control-group">
         <div class="controls">
-          <input type="text" id="inputPassword" class="span3" placeholder="请输入5位验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" style="width: 100%;height: 30px;">
+          <input type="text" id="inputPassword" class="span3" placeholder="请输入5位验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify" style="width: 100%;height: 30px;border-radius:5px;">
         </div>
       </div>
       <div class="control-group">
@@ -116,45 +79,11 @@
       </div>
     </form>
   </div>
-</section>
-
-	    </div>
-	</div>
-
-	<script type="text/javascript">
-	    $(function(){
-	        $(window).resize(function(){
-	            $("#main-container").css("min-height", $(window).height() - 343);
-	        }).resize();
-	    })
-	</script>
-	<!-- /主体 -->
-
-	<!-- 底部 -->
-	
-    <!-- 底部
-    ================================================== -->
-<!--
-    <footer class="footer">
-      <div class="container">
-          <p> 本站由 <strong><a href="http://www.twothink.cn" target="_blank">TwoThink</a></strong> 强力驱动</p>
-      </div>
-    </footer>
--->
-
-	<script type="text/javascript">
-(function(){
-	var ThinkPHP = window.Think = {
-		"ROOT"   : "__ROOT__", //当前网站地址
-		"APP"    : "__APP__", //当前项目地址
-		"PUBLIC" : "__PUBLIC__", //项目公共目录地址
-		"DEEP"   : "<?php echo config('URL_PATHINFO_DEPR'); ?>", //PATHINFO分割符
-		"MODEL"  : ["<?php echo config('URL_MODEL'); ?>", "<?php echo config('URL_CASE_INSENSITIVE'); ?>", "<?php echo config('URL_HTML_SUFFIX'); ?>"],
-		"VAR"    : ["<?php echo config('VAR_MODULE'); ?>", "<?php echo config('VAR_CONTROLLER'); ?>", "<?php echo config('VAR_ACTION'); ?>"]
-	}
-})();
-</script>
-	
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/static/jquery-1.11.2.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/statics/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
     $(document)
@@ -194,13 +123,20 @@
         });
     });
 </script>
- <!-- 用于加载js代码 -->
-	<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
-	<?php echo hook('pageFooter', 'widget'); ?>
-	<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
-		
-	</div>
+<script>
+    $(function(){
+        $("#my").click(function(){
+            var login ="<?=is_login()?>";
+            if(login){
 
-	<!-- /底部 -->
+                window.location="/user/user/my.html";
+            }else{
+                alert("请先登录");
+                window.location="/user/login/index.html";
+            }
+        });
+
+    })
+</script>
 </body>
 </html>

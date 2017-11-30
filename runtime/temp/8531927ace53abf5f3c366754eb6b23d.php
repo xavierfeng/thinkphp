@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:76:"D:\www\thinkphp\public/../application/admin/view/default/article\notice.html";i:1511767996;s:73:"D:\www\thinkphp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:76:"D:\www\thinkphp\public/../application/admin/view/default/article\notice.html";i:1511935928;s:73:"D:\www\thinkphp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -136,7 +136,7 @@
 						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="<?php echo $notice['id']; ?>"> </td>
 						<td><?php echo $notice['member']; ?></td>
 						<td><?php echo $notice['title']; ?></td>
-						<td><?php echo $notice['content']; ?></td>
+						<td><?php echo $notice['title']; ?><?php echo $notice['title']; ?></td>
                         <td><?php echo time_format($notice['create_time'] ); ?></td>
                         <td><?php echo $notice['view_times']; ?></td>
 						<td>

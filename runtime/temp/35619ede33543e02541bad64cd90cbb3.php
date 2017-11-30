@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:77:"D:\www\thinkphp\public/../application/admin/view/default/article\service.html";i:1511766864;s:73:"D:\www\thinkphp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:77:"D:\www\thinkphp\public/../application/admin/view/default/article\service.html";i:1511935937;s:73:"D:\www\thinkphp\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -136,7 +136,7 @@
 						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="<?php echo $service['id']; ?>"> </td>
 						<td><?php echo $service['member']; ?></td>
 						<td><?php echo $service['title']; ?></td>
-						<td><?php echo $service['content']; ?></td>
+						<td><?php echo $service['title']; ?><?php echo $service['title']; ?></td>
                         <td><?php echo time_format($service['create_time'] ); ?></td>
                         <td><?php echo $service['view_times']; ?></td>
 						<td>
