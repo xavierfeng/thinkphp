@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\thinkphp\public/../application/home/view/default/index\index.html";i:1512021976;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\thinkphp\public/../application/home/view/default/index\index.html";i:1512025803;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -76,7 +76,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="/home/index/Bactivity.html">
+                        <a href="/home/index/bactivity.html">
                             <div class="indexLabel label-success">
                                 <span class="glyphicon glyphicon-briefcase"></span><br/>
                                 商家活动
@@ -92,7 +92,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="/home/index/Vactivity.html">
+                        <a href="/home/index/vactivity.html">
                             <div class="indexLabel label-default">
                                 <span class="glyphicon glyphicon-apple"></span><br/>
                                 小区活动

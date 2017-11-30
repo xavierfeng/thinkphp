@@ -9,6 +9,7 @@
 
 namespace app\user\controller;
 use app\common\controller\UcApi;
+use think\Db;
 
 /**
  * 用户控制器
@@ -49,8 +50,32 @@ class User extends Base {
         }
     }
 
+    //我的
     public function my()
     {
+        return $this->fetch();
+    }
+
+    //我的报修
+    public function myproperty()
+    {
+        $user =get_username();
+        $list =Db::name('property')->where('user',$user)->select();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    //报名的活动
+    public function myactivity()
+    {
+        $user_id=is_login();
+        $activities =Db::name('join')->where('user_id',$user_id)->select();
+        $ids=[];
+        foreach ($activities as $activity){
+            $ids[]=$activity['activity_id'];
+        }
+        $list = Db::name('document')->where('id','in',$ids)->select();
+        $this->assign('list',$list);
         return $this->fetch();
     }
 }

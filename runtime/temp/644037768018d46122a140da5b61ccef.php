@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:73:"D:\www\thinkphp\public/../application/home/view/default/index\faxian.html";i:1512025931;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"D:\www\thinkphp\public/../application/user/view/default/user\myactivity.html";i:1512037089;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>发现</title>
+    <title>小区活动</title>
 
     <!-- Bootstrap -->
     <link href="/static/statics/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,16 +45,21 @@
     <!--导航结束-->
 
     <div class="container-fluid">
-        <div class="indexImg row">
-            <img src="/static/statics/image/4.png" width="100%" />
+        <?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$Vactivity): $mod = ($i % 2 );++$i;?>
+        <div class="row noticeList">
+            <a href="<?php echo url('/home/index/vactivityDetail?id='.$Vactivity['id']); ?>">
+                <div class="col-xs-2">
+                    <img class="noticeImg" src="<?php echo get_cover($Vactivity['cover_id'])['path']; ?>" />
+                </div>
+                <div class="col-xs-10">
+                    <p class="title"><?php echo $Vactivity['title']; ?></p>
+                    <p class="intro"><?php echo $Vactivity['description']; ?></p>
+                    <p class="info">浏览次数:<?php echo $Vactivity['view']; ?><span class="pull-right"><?php echo time_format($Vactivity['create_time'] ); ?></span> </p>
+                </div>
+            </a>
         </div>
-        <div class="blank"></div>
-        <div class="container">
-            <ul class="list-group fuwuList">
-                <li class="list-group-item"><a href="/home/index/bactivity.html" class="text-danger"><span class="iconfont">&#xe604;</span>商家活动</a> </li>
-
-            </ul>
-        </div>
+        <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+        <div class="ajax"></div>
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"D:\www\thinkphp\public/../application/user/view/default/user\my.html";i:1512011641;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"D:\www\thinkphp\public/../application/user/view/default/user\my.html";i:1512034705;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -60,8 +60,8 @@
         <div class="blank"></div>
         <div class="row text-center myLabel">
             <div class="col-xs-4 label-danger"><a href="javascript:;"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
-            <div class="col-xs-4 label-success"><a href="javascript:;"><span class="iconfont">&#xe609;</span>我的报修</a></div>
-            <div class="col-xs-4 label-primary"><a href="javascript:;"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
+            <div class="col-xs-4 label-success"><a id="property" href="javascript:;"><span class="iconfont">&#xe609;</span>我的报修</a></div>
+            <div class="col-xs-4 label-primary"><a id="activity" href="javascript:;"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
         </div>
         <div class="blank"></div>
         <div>
@@ -90,17 +90,31 @@
             }
         });
 
-        //点击时判断是否通过业主认证
-        $("a").click(function(){
+        //点击报名活动时判断是否通过业主认证
+        $("#activity").click(function(){
             var login ="<?=is_login()?>";
             $.post("/home/index/checkIdentify.html",{uid:login},function(data){
                     if(data=="true"){
                         alert("请先通过业主认证");
                         window.location="/home/index/identify.html";
                     }else{
-                       alert("OK");
+                        window.location="/user/user/myactivity.html";
                     }
                 })
+
+        });
+
+        //点击我的报修时判断是否通过业主认证
+        $("#property").click(function(){
+            var login ="<?=is_login()?>";
+            $.post("/home/index/checkIdentify.html",{uid:login},function(data){
+                if(data=="true"){
+                    alert("请先通过业主认证");
+                    window.location="/home/index/identify.html";
+                }else{
+                    window.location="/user/user/myproperty.html";
+                }
+            })
 
         });
 

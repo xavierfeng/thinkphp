@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"D:\www\thinkphp\public/../application/home/view/default/index\bactivity.html";i:1511955696;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"D:\www\thinkphp\public/../application/home/view/default/index\bactivity.html";i:1512025905;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -47,7 +47,7 @@
     <div class="container-fluid">
         <?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$Bactivity): $mod = ($i % 2 );++$i;?>
         <div class="row noticeList">
-            <a href="<?php echo url('BactivityDetail?id='.$Bactivity['id']); ?>">
+            <a href="<?php echo url('bactivityDetail?id='.$Bactivity['id']); ?>">
                 <div class="col-xs-2">
                     <img class="noticeImg" src="<?php echo get_cover($Bactivity['cover_id'])['path']; ?>" />
                 </div>
@@ -75,7 +75,7 @@
             var page=1;
             $("#get").click(function(){
                 ++page;
-                $.getJSON("/home/index/BactivityAjax.html",{page:page},function(data){
+                $.getJSON("/home/index/bactivityAjax.html",{page:page},function(data){
                     if(data==""){
                         $("button").html('没有更多了!')
                     }
@@ -83,7 +83,7 @@
                         var that = this;
                         var cover_id=this.cover_id;
                         $.getJSON("/home/index/getPicture.html",{cover_id:cover_id},function(src){
-                            $(".ajax").append("<div class='row noticeList'><a href='/home/index/BactivityDetail?id="+that.id+"'><div class='col-xs-2'><img class='noticeImg' src='"+src.path+"' /></div><div class='col-xs-10'><p class='title'>"+that.title+"</p><p class='intro'>"+that.title+that.title+"</p><p class='info'>浏览次数:"+that.view+"<span class='pull-right'>"+getLocalTime(that.create_time)+"</span></p></div></a></div>");
+                            $(".ajax").append("<div class='row noticeList'><a href='/home/index/bactivityDetail?id="+that.id+"'><div class='col-xs-2'><img class='noticeImg' src='"+src.path+"' /></div><div class='col-xs-10'><p class='title'>"+that.title+"</p><p class='intro'>"+that.title+that.title+"</p><p class='info'>浏览次数:"+that.view+"<span class='pull-right'>"+getLocalTime(that.create_time)+"</span></p></div></a></div>");
                         });
 
                     });
