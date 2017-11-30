@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"D:\www\thinkphp\public/../application/user/view/default/user\my.html";i:1511955281;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"D:\www\thinkphp\public/../application/user/view/default/user\my.html";i:1512011641;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -59,16 +59,16 @@
         </div>
         <div class="blank"></div>
         <div class="row text-center myLabel">
-            <div class="col-xs-4 label-danger"><a href="#"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
-            <div class="col-xs-4 label-success"><a href="#"><span class="iconfont">&#xe609;</span>我的报修</a></div>
-            <div class="col-xs-4 label-primary"><a href="#"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
+            <div class="col-xs-4 label-danger"><a href="javascript:;"><span class="iconfont">&#xe60b;</span>我的资料</a></div>
+            <div class="col-xs-4 label-success"><a href="javascript:;"><span class="iconfont">&#xe609;</span>我的报修</a></div>
+            <div class="col-xs-4 label-primary"><a href="javascript:;"><span class="iconfont">&#xe606;</span>报名的活动</a></div>
         </div>
         <div class="blank"></div>
         <div>
             <ul class="list-group fuwuList">
-                <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe60a;</span>我的缴费账单</a> </li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe608;</span>我的物业通知</a></li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe607;</span>我的水电气使用</a></li>
+                <li class="list-group-item"><a href="javascript:;" class="text-danger"><span class="iconfont">&#xe60a;</span>我的缴费账单</a> </li>
+                <li class="list-group-item"><a href="javascript:;" class="text-info"><span class="iconfont">&#xe608;</span>我的物业通知</a></li>
+                <li class="list-group-item"><a href="javascript:;" class="text-info"><span class="iconfont">&#xe607;</span>我的水电气使用</a></li>
             </ul>
         </div>
     </div>
@@ -88,6 +88,20 @@
                 alert("请先登录");
                 window.location="/user/login/index.html";
             }
+        });
+
+        //点击时判断是否通过业主认证
+        $("a").click(function(){
+            var login ="<?=is_login()?>";
+            $.post("/home/index/checkIdentify.html",{uid:login},function(data){
+                    if(data=="true"){
+                        alert("请先通过业主认证");
+                        window.location="/home/index/identify.html";
+                    }else{
+                       alert("OK");
+                    }
+                })
+
         });
 
     })

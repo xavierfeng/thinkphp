@@ -51,10 +51,10 @@
         <div class="container">
             <ul class="list-group fuwuList">
                 <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe604;</span>调查问卷</a> </li>
-                <li class="list-group-item"><a href="yezhurenzheng.html" class="text-info"><span class="iconfont">&#xe605;</span>业主认证</a></li>
-                <li class="list-group-item"><a href="#" class="text-success"><span class="iconfont">&#xe602;</span>在线缴费</a></li>
-                <li class="list-group-item"><a href="notice.html" class="text-warning"><span class="iconfont">&#xe601;</span>生活贴士</a></li>
-                <li class="list-group-item"><a href="about.html" class="text-primary"><span class="iconfont">&#xe600;</span>关于我们</a></li>
+                <li class="list-group-item"><a href="javascript:;" class="text-info" id="identify"><span class="iconfont">&#xe605;</span>业主认证</a></li>
+                <li class="list-group-item"><a href="javascript:;" class="text-success" id="pay"><span class="iconfont">&#xe602;</span>在线缴费</a></li>
+                <li class="list-group-item"><a href="/home/index/tips.html" class="text-warning"><span class="iconfont">&#xe601;</span>生活贴士</a></li>
+                <li class="list-group-item"><a href="/home/index/about.html" class="text-primary"><span class="iconfont">&#xe600;</span>关于我们</a></li>
             </ul>
         </div>
     </div>
@@ -65,6 +65,7 @@
 <script src="/static/statics/bootstrap/js/bootstrap.min.js"></script>
 <script>
     $(function(){
+        //点击我的判断登录
         $("#my").click(function(){
             var login ="<?=is_login()?>";
             if(login){
@@ -76,7 +77,35 @@
             }
         });
 
-    })
+        //点击业主认证
+        $("#identify").click(function(){
+            var login ="<?=is_login()?>";
+            if(login!=0){
+                $.post("/home/index/checkIdentify.html",{uid:login},function(data){
+                if(data=="true"){
+                    window.location="/home/index/identify.html";
+                }else{
+                    alert("您已通过认证,不需要再次认证")
+                }
+                })
+            }else{
+                alert("请先登录");
+                window.location="/user/login/index.html";
+            }
+        });
+
+        //点击在线缴费
+        $("#pay").click(function(){
+            var login ="<?=is_login()?>";
+            if(login!=0){
+                alert("缴费成功");
+            }else{
+                alert("请先登录");
+                window.location="/user/login/index.html";
+            }
+        })
+
+    });
 </script>
 </body>
 </html>

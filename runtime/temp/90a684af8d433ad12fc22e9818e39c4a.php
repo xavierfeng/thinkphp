@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:71:"D:\www\thinkphp\public/../application/home/view/default/index\fuwu.html";i:1512025986;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\thinkphp\public/../application/home/view/default/index\about.html";i:1512014039;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>服务</title>
+    <title>关于我们</title>
 
     <!-- Bootstrap -->
     <link href="/static/statics/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,28 +45,20 @@
     <!--导航结束-->
 
     <div class="container-fluid">
-        <div class="indexImg row">
-            <img src="/static/statics/image/3.png" width="100%" />
-        </div>
         <div class="blank"></div>
-        <div class="container">
-            <ul class="list-group fuwuList">
-                <li class="list-group-item"><a href="diaochawenjuan.html" class="text-danger"><span class="iconfont">&#xe604;</span>调查问卷</a> </li>
-                <li class="list-group-item"><a href="javascript:;" class="text-info" id="identify"><span class="iconfont">&#xe605;</span>业主认证</a></li>
-                <li class="list-group-item"><a href="javascript:;" class="text-success" id="pay"><span class="iconfont">&#xe602;</span>在线缴费</a></li>
-                <li class="list-group-item"><a href="/home/index/tips.html" class="text-warning"><span class="iconfont">&#xe601;</span>生活贴士</a></li>
-                <li class="list-group-item"><a href="/home/index/about.html" class="text-primary"><span class="iconfont">&#xe600;</span>关于我们</a></li>
-            </ul>
+        <h3 class="noticeDetailTitle"><strong><?php echo $info['title']; ?></strong></h3>
+        <img class="noticeImg" src="<?php echo get_cover($info['cover_id'])['path']; ?>" />
+        <div class="noticeDetailContent">
+            <?php echo $info['description']; ?>
         </div>
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static/static/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/static/statics/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/static/bootstrap/js/bootstrap.min.js"></script>
 <script>
     $(function(){
-        //点击我的判断登录
         $("#my").click(function(){
             var login ="<?=is_login()?>";
             if(login){
@@ -78,35 +70,7 @@
             }
         });
 
-        //点击业主认证
-        $("#identify").click(function(){
-            var login ="<?=is_login()?>";
-            if(login!=0){
-                $.post("/home/index/checkIdentify.html",{uid:login},function(data){
-                if(data=="true"){
-                    window.location="/home/index/identify.html";
-                }else{
-                    alert("您已通过认证,不需要再次认证")
-                }
-                })
-            }else{
-                alert("请先登录");
-                window.location="/user/login/index.html";
-            }
-        });
-
-        //点击在线缴费
-        $("#pay").click(function(){
-            var login ="<?=is_login()?>";
-            if(login!=0){
-                alert("缴费成功");
-            }else{
-                alert("请先登录");
-                window.location="/user/login/index.html";
-            }
-        })
-
-    });
+    })
 </script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>小区活动</title>
+    <title>商家活动</title>
 
     <!-- Bootstrap -->
     <link href="/static/statics/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -45,16 +45,16 @@
 
     <div class="container-fluid">
         {notempty name="list"}
-        {volist name="list" id="Vactivity"}
+        {volist name="list" id="Bactivity"}
         <div class="row noticeList">
-            <a href="{:url('VactivityDetail?id='.$Vactivity['id'])}">
+            <a href="{:url('bactivityDetail?id='.$Bactivity['id'])}">
                 <div class="col-xs-2">
-                    <img class="noticeImg" src="{:get_cover($Vactivity.cover_id)['path']}" />
+                    <img class="noticeImg" src="{:get_cover($Bactivity.cover_id)['path']}" />
                 </div>
                 <div class="col-xs-10">
-                    <p class="title">{$Vactivity.title}</p>
-                    <p class="intro">{$Vactivity.description}</p>
-                    <p class="info">浏览次数:{$Vactivity.view}<span class="pull-right">{$Vactivity.create_time | time_format}</span> </p>
+                    <p class="title">{$Bactivity.title}</p>
+                    <p class="intro">{$Bactivity.description}</p>
+                    <p class="info">浏览次数:{$Bactivity.view}<span class="pull-right">{$Bactivity.create_time | time_format}</span> </p>
                 </div>
             </a>
         </div>
@@ -76,7 +76,7 @@
             var page=1;
             $("#get").click(function(){
                 ++page;
-                $.getJSON("/home/index/VactivityAjax.html",{page:page},function(data){
+                $.getJSON("/home/index/bactivityAjax.html",{page:page},function(data){
                     if(data==""){
                         $("button").html('没有更多了!')
                     }
@@ -84,7 +84,7 @@
                         var that = this;
                         var cover_id=this.cover_id;
                         $.getJSON("/home/index/getPicture.html",{cover_id:cover_id},function(src){
-                            $(".ajax").append("<div class='row noticeList'><a href='/home/index/VactivityDetail?id="+that.id+"'><div class='col-xs-2'><img class='noticeImg' src='"+src.path+"' /></div><div class='col-xs-10'><p class='title'>"+that.title+"</p><p class='intro'>"+that.title+that.title+"</p><p class='info'>浏览次数:"+that.view+"<span class='pull-right'>"+getLocalTime(that.create_time)+"</span></p></div></a></div>");
+                            $(".ajax").append("<div class='row noticeList'><a href='/home/index/bactivityDetail?id="+that.id+"'><div class='col-xs-2'><img class='noticeImg' src='"+src.path+"' /></div><div class='col-xs-10'><p class='title'>"+that.title+"</p><p class='intro'>"+that.title+that.title+"</p><p class='info'>浏览次数:"+that.view+"<span class='pull-right'>"+getLocalTime(that.create_time)+"</span></p></div></a></div>");
                         });
 
                     });

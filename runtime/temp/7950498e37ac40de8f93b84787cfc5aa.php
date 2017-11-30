@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\thinkphp\public/../application/home/view/default/index\index.html";i:1511956328;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\www\thinkphp\public/../application/home/view/default/index\index.html";i:1512021976;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -84,7 +84,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="zushou.html">
+                        <a href="/home/index/rent.html">
                             <div class="indexLabel label-primary">
                                 <span class="glyphicon glyphicon-usd"></span><br/>
                                 小区租售

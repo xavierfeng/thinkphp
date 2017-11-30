@@ -64,6 +64,39 @@ class Index extends Home{
         return $this->fetch();
     }
 
+    //业主认证
+    public function identify()
+    {
+        return $this->fetch();
+    }
+
+    //业主认证Ajax
+    public function identifyAjax()
+    {
+        $member=Db::name('ucenter_member')->find($_POST['uid']);
+        if($member['identify']==0){
+            \think\Db::name('ucenter_member')->where('id',$_POST['uid'])->setField('identify',1);
+            echo 'true';
+        }
+    }
+
+    //点击业主认证判断是否认证 Ajax
+    public function checkIdentify()
+    {
+        $member=Db::name('ucenter_member')->find($_POST['uid']);
+        if($member['identify']==0){
+            echo 'true';
+        }
+    }
+
+    //关于我们
+    public function about()
+    {
+        $info = \think\Db::name('document')->whereLike('name','About')->find();
+        $this->assign('info',$info);
+        return $this->fetch();
+    }
+
     //发现
     public function faxian()
     {
@@ -77,7 +110,7 @@ class Index extends Home{
         if($_GET){
             $page=$_GET['page'];
         }
-        $pageSize=2;
+        $pageSize=1;
         $start=($page-1)*$pageSize;
         $list =Db::name('notice')->limit($start,$pageSize)->select();
         $this->assign('list',$list);
@@ -88,7 +121,7 @@ class Index extends Home{
     public function noticeAjax()
     {
         $page=$_GET['page'];
-        $pageSize=2;
+        $pageSize=1;
         $start=($page-1)*$pageSize;
         $list =Db::name('notice')->limit($start,$pageSize)->select();
         echo json_encode($list);
@@ -116,7 +149,7 @@ class Index extends Home{
         if($_GET){
             $page=$_GET['page'];
         }
-        $pageSize=2;
+        $pageSize=1;
         $start=($page-1)*$pageSize;
         $list =Db::name('service')->limit($start,$pageSize)->select();
         $this->assign('list',$list);
@@ -126,7 +159,7 @@ class Index extends Home{
     public function serviceAjax()
     {
         $page=$_GET['page'];
-        $pageSize=2;
+        $pageSize=1;
         $start=($page-1)*$pageSize;
         $list =Db::name('service')->limit($start,$pageSize)->select();
         echo json_encode($list);
@@ -155,7 +188,7 @@ class Index extends Home{
     }
 
     //商家活动
-    public function Bactivity()
+    public function bactivity()
     {
         $page=1;
         if($_GET){
@@ -168,7 +201,7 @@ class Index extends Home{
         return $this->fetch();
     }
     //商家活动Ajax
-    public function BactivityAjax()
+    public function bactivityAjax()
     {
         $page=$_GET['page'];
         $pageSize=1;
@@ -178,7 +211,7 @@ class Index extends Home{
 
     }
     //商家活动详情
-    public function BactivityDetail($id)
+    public function bactivityDetail($id)
     {
         $info =[];
         /* 获取数据 */
@@ -194,7 +227,7 @@ class Index extends Home{
     }
 
     //小区活动
-    public function Vactivity()
+    public function vactivity()
     {
         $page=1;
         if($_GET){
@@ -207,7 +240,7 @@ class Index extends Home{
         return $this->fetch();
     }
     //小区活动Ajax
-    public function VactivityAjax()
+    public function vactivityAjax()
     {
         $page=$_GET['page'];
         $pageSize=1;
@@ -217,7 +250,7 @@ class Index extends Home{
 
     }
     //小区活动详情
-    public function VactivityDetail($id)
+    public function vactivityDetail($id)
     {
         $info =[];
         /* 获取数据 */
@@ -247,4 +280,52 @@ class Index extends Home{
         }
     }
 
+    //生活贴士
+    public function tips()
+    {
+        $page=1;
+        if($_GET){
+            $page=$_GET['page'];
+        }
+        $pageSize=1;
+        $start=($page-1)*$pageSize;
+        //小区活动
+        $Vactivity =Db::name('document')->whereLike('name','Vactivity%')->where('deadline','>',time())->where('status',1)->limit($start,$pageSize)->select();
+        //便民服务
+
+        $service =Db::name('service')->limit($start,$pageSize)->select();
+        //小区通知
+        $notice =Db::name('notice')->limit($start,$pageSize)->select();
+
+        $this->assign('Vactivity',$Vactivity);
+        $this->assign('service',$service);
+        $this->assign('notice',$notice);
+        return $this->fetch();
+    }
+
+    //小区租售
+    public function rent()
+    {
+        //租房
+        $list1 =Db::name('document')->whereLike('name','rent%')->where('deadline','>',time())->where('status',1)->select();
+        //售房
+        $list2 =Db::name('document')->whereLike('name','sale%')->where('deadline','>',time())->where('status',1)->select();
+        $this->assign('list1',$list1);
+        $this->assign('list2',$list2);
+        return $this->fetch();
+    }
+
+    //小区租售详情
+    public function rentDetail($id)
+    {
+        $info = \think\Db::name('document')->find($id);
+        $infoContent = \think\Db::name('document_article')->find($id);
+        \think\Db::name('document')->where('id',$id)->setInc('view');
+        if(false === $info){
+            $this->error('获取配置信息错误');
+        }
+        $this->assign('info', $info);
+        $this->assign('infoContent', $infoContent);
+        return $this->fetch();
+    }
 }
